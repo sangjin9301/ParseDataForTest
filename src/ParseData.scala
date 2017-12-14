@@ -13,9 +13,9 @@ import scala.util.control.Breaks.{break, breakable}
   */
 class ParseData {
 
-  val user_list_path = "D:/Context_Aware_Authentication/ParseDataForTest/UserList.csv"
-  var locationPath: String = "D:/Context_Aware_Authentication/ParseDataForTest/LOCATION"
-  var callLogPath: String = "D:/Context_Aware_Authentication/ParseDataForTest/CDR"
+  val user_list_path = "D:/ParseDataForTest/UserList.csv"
+  var locationPath: String = "D:/ParseDataForTest/LOCATION"
+  var callLogPath: String = "D:/ParseDataForTest/CDR"
 
   val splitBy = ","
   val user_list = setUserList(user_list_path)
