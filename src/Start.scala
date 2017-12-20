@@ -83,22 +83,22 @@ object Start {
 
   }
 
-  def savePR(path:String):Unit={
+  def savePR(path: String): Unit = {
     var bufReader: BufferedReader = null
     bufReader = new BufferedReader(new FileReader(path))
     var LineList = new ArrayBuffer[Array[String]]
-//    var sb = new StringBuilder
+    //    var sb = new StringBuilder
     val iter = new LineIterator(bufReader)
     while (iter.hasNext) {
       var temp = iter.nextLine.split(",")
-//      sb.append(temp(0))
-//      sb.append(",")
-//      sb.append(temp(1))
-//      sb.append(",")
-//      sb.append(temp(2))
-//      sb.append(",")
-//      sb.append(temp(3))
-//      sb.append("\n")
+      //      sb.append(temp(0))
+      //      sb.append(",")
+      //      sb.append(temp(1))
+      //      sb.append(",")
+      //      sb.append(temp(2))
+      //      sb.append(",")
+      //      sb.append(temp(3))
+      //      sb.append("\n")
       LineList += temp
     }
 
@@ -129,52 +129,52 @@ object Start {
     var tn_list_count: Double = getTrueCount(tn_list)
     var tp_list_count: Double = getTrueCount(tp_list)
 
-//    sb.append("\n")
-//    sb.append("Precision")
-//    sb.append(",")
-//    sb.append("Recall")
-//    sb.append(",")
-//    sb.append("Accuracy")
-//    sb.append(",")
-//    sb.append("F-measure")
-//    sb.append("\n")
+    //    sb.append("\n")
+    //    sb.append("Precision")
+    //    sb.append(",")
+    //    sb.append("Recall")
+    //    sb.append(",")
+    //    sb.append("Accuracy")
+    //    sb.append(",")
+    //    sb.append("F-measure")
+    //    sb.append("\n")
 
     var Precision = tp_list_count / (tp_list_count + fp_list_count)
     var Recall = tp_list_count / (tp_list_count + fn_list_count)
     var Accuracy = (tp_list_count + tn_list_count) / LineList.size
     var F_Measure = (2 * Precision * Recall) / (Precision + Recall)
-//    sb.append(Precision)
-//    sb.append(",")
-//    sb.append(Recall)
-//    sb.append(",")
-//    sb.append(Accuracy)
-//    sb.append(",")
-//    sb.append(F_Measure)
-//    sb.append("\n")
-//
-//    var writer = new FileWriter(path)
-//    writer.write(sb.mkString)
-//    writer.close()
+    //    sb.append(Precision)
+    //    sb.append(",")
+    //    sb.append(Recall)
+    //    sb.append(",")
+    //    sb.append(Accuracy)
+    //    sb.append(",")
+    //    sb.append(F_Measure)
+    //    sb.append("\n")
+    //
+    //    var writer = new FileWriter(path)
+    //    writer.write(sb.mkString)
+    //    writer.close()
 
-    println("------------------"+path+"-----------------")
-    println("Precision : "+Precision)
-    println("Recall : "+Recall)
-    println("Accuracy : "+Accuracy)
-    println("F_Measure : "+F_Measure)
+    println("------------------" + path + "-----------------")
+    println("Precision : " + Precision)
+    println("Recall : " + Recall)
+    println("Accuracy : " + Accuracy)
+    println("F_Measure : " + F_Measure)
 
 
   }
 
-  def saveResult(dir:String ,user: String, other: String, predict: Boolean): Unit = {
+  def saveResult(dir: String, user: String, other: String, predict: Boolean): Unit = {
     var actual = user.equals(other)
     var path = "D:/ParseDataForTest/Precision&Recall"
-    var filePath = path + "/"+dir+ user + ".csv"
+    var filePath = path + "/" + dir + user + ".csv"
     var file = new File(path)
     if (!file.exists) {
       file.mkdirs
     }
     var legacy = new File(filePath)
-    if(!legacy.exists){
+    if (!legacy.exists) {
       var writer = new FileWriter(filePath)
       writer.write("")
       writer.close()
@@ -255,17 +255,20 @@ object Start {
 
   def main(args: Array[String]): Unit = {
 
-    var rule = new Rule("fa10-01-10",1305324180)
-    println(rule.Rule01)
-    println(rule.Rule02)
-    println(rule.Rule03)
-    println(rule.Rule04)
-    println(rule.Rule05)
-    println(rule.Rule06)
-    println(rule.Rule07)
-    println(rule.Rule08)
-    println(rule.Rule09)
-    println(rule.Rule10)
+    var pd = new ParseData
+    pd.mkTestFiles
+    pd.mkTestStolenFiles
+    //    var rule = new Rule("fa10-01-10",1305324180)
+    //    println(rule.Rule01)
+    //    println(rule.Rule02)
+    //    println(rule.Rule03)
+    //    println(rule.Rule04)
+    //    println(rule.Rule05)
+    //    println(rule.Rule06)
+    //    println(rule.Rule07)
+    //    println(rule.Rule08)
+    //    println(rule.Rule09)
+    //    println(rule.Rule10)
 
 
   }

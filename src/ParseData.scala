@@ -358,4 +358,157 @@ class ParseData {
     return week
   }
 
+
+  def mkTestFiles: Unit = {
+    var file = new File("D:/ParseDataForTest/Test/LOCATION")
+    if (!file.exists) {
+      file.mkdirs();
+    }
+    file = new File("D:/ParseDataForTest/Test/CDR")
+    if (!file.exists) {
+      file.mkdirs();
+    }
+
+    for (i <- 0 to 84) {
+      var user = user_list(i)
+      var readFile = locationPath + "/" + user + ".csv"
+      var writeFile = "D:/ParseDataForTest/Test/LOCATION/" + user + ".csv"
+      var writer = new FileWriter(writeFile)
+
+      var bufReader: BufferedReader = null
+      bufReader = new BufferedReader(new FileReader(readFile))
+      val iter = new LineIterator(bufReader)
+
+      var sb = new StringBuilder
+      while (iter.hasNext) {
+        var line = iter.nextLine()
+        var arr = line.split(",")
+        if(arr(2).equals("Timestamp")){}
+        else{
+          if(arr(2).toInt<=1304000000){
+            sb.append(line)
+            sb.append("\n")
+          }
+        }
+
+      }
+
+      writer.write(sb.mkString)
+      writer.close()
+    }
+
+    for (i <- 0 to 84) {
+      var user = user_list(i)
+      var readFile = callLogPath + "/" + user + ".csv"
+      var writeFile = "D:/ParseDataForTest/Test/CDR/" + user + ".csv"
+      var writer = new FileWriter(writeFile)
+
+      var bufReader: BufferedReader = null
+      bufReader = new BufferedReader(new FileReader(readFile))
+      val iter = new LineIterator(bufReader)
+
+      var sb = new StringBuilder
+      while (iter.hasNext) {
+        var line = iter.nextLine()
+        var arr = line.split(",")
+        if(arr(2).equals("Timestamp")){}
+        else{
+          if(arr(2).toInt<=1304000000){
+            sb.append(line)
+            sb.append("\n")
+          }
+        }
+      }
+
+      writer.write(sb.mkString)
+      writer.close()
+    }
+
+
+  }
+
+  ///////////////////////////////////////////////////////////////
+
+  def mkTestStolenFiles: Unit = {
+    var file = new File("D:/ParseDataForTest/Test/StolenLOCATION")
+    if (!file.exists) {
+      file.mkdirs();
+    }
+    file = new File("D:/ParseDataForTest/Test/StolenCDR")
+    if (!file.exists) {
+      file.mkdirs();
+    }
+
+    for (i <- 0 to 84) {
+      var user = user_list(i)
+      var readFile = "D:/ParseDataForTest/Test/Location/" + user + ".csv"
+      var writeFile = "D:/ParseDataForTest/Test/StolenLOCATION/" + user + ".csv"
+      var writer = new FileWriter(writeFile)
+
+      var bufReader: BufferedReader = null
+      bufReader = new BufferedReader(new FileReader(readFile))
+      val iter = new LineIterator(bufReader)
+
+      var last = ""
+
+      var sb = new StringBuilder
+      while (iter.hasNext) {
+        var line = iter.nextLine()
+        var arr = line.split(",")
+        if(arr(2).equals("Timestamp")){}
+        else{
+          if(arr(2).toInt<=1304000000){
+            last = arr(2)
+            sb.append(line)
+            sb.append("\n")
+          }
+        }
+
+      }
+
+      sb.append("fa10-01-03,2010-09-21  10:53:07 AM,"+(last.toInt+1200)+",21,5,802,351,632"+"\n")
+      sb.append("fa10-01-03,2010-09-21  10:53:07 AM,"+(last.toInt+2400)+",21,5,60,-44,-62"+"\n")
+      sb.append("fa10-01-03,2010-09-21  10:53:07 AM,"+(last.toInt+3600)+",22,5,60,-43,-61"+"\n")
+
+      writer.write(sb.mkString)
+      writer.close()
+    }
+
+    for (i <- 0 to 84) {
+      var user = user_list(i)
+      var readFile = "D:/ParseDataForTest/Test/CDR/" + user + ".csv"
+      var writeFile = "D:/ParseDataForTest/Test/StolenCDR/" + user + ".csv"
+      var writer = new FileWriter(writeFile)
+
+      var bufReader: BufferedReader = null
+      bufReader = new BufferedReader(new FileReader(readFile))
+      val iter = new LineIterator(bufReader)
+
+      var last = ""
+
+      var sb = new StringBuilder
+      while (iter.hasNext) {
+        var line = iter.nextLine()
+        var arr = line.split(",")
+        if(arr(2).equals("Timestamp")){}
+        else{
+          if(arr(2).toInt<=1304000000){
+            last = arr(2)
+            sb.append(line)
+            sb.append("\n")
+          }
+        }
+      }
+
+      sb.append("fa10-01-14,2010-09-21  10:53:07 AM,"+(last.toInt+1200)+",11,3,outgoing+,3c26dffc8a2e8804dfe2c8a1195cfaa5ef6d0014"+"\n")
+      sb.append("fa10-01-14,2010-09-21  10:53:07 AM,"+(last.toInt+2400)+",11,3,outgoing+,b405fafb619e7b40d694436b90fd4c07f0e3dd3"+"\n")
+      sb.append("fa10-01-14,2010-09-21  10:53:07 AM,"+(last.toInt+3600)+",11,3,outgoing+,b405fafb619e7b40d694436b90fd4c07f0e3dd3"+"\n")
+
+      writer.write(sb.mkString)
+      writer.close()
+    }
+
+
+  }
+
 }
