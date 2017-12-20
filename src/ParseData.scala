@@ -141,8 +141,8 @@ class ParseData {
       loc.setTimestamp(line(2).toDouble)
       loc.setTime(line(3).toInt)
       loc.setWeek(line(4).toInt)
-      loc.setX(line(5).toDouble)
-      loc.setY(line(6).toDouble)
+      loc.setX(line(6).toDouble)
+      loc.setY(line(7).toDouble)
       loc_list += loc
 
     })

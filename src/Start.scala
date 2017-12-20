@@ -255,8 +255,18 @@ object Start {
 
   def main(args: Array[String]): Unit = {
 
-    savePR("D:/ParseDataForTest/Precision&Recall/"+"1h_yesterday_1h_sp10-01-46.csv")
-    savePR("D:/ParseDataForTest/Precision&Recall/"+"1h_lastweek_1h_sp10-01-46.csv")
+    var rule = new Rule("fa10-01-10",1305324180)
+    println(rule.Rule01)
+    println(rule.Rule02)
+    println(rule.Rule03)
+    println(rule.Rule04)
+    println(rule.Rule05)
+    println(rule.Rule06)
+    println(rule.Rule07)
+    println(rule.Rule08)
+    println(rule.Rule09)
+    println(rule.Rule10)
+
 
   }
 }

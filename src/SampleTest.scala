@@ -53,6 +53,22 @@ class SampleTest {
 
     return (req_arr.toArray, base_arr.toArray)
   }
+  def changeMapToArraySet_Location(req_map: util.HashMap[(Double,Double), Int], base_map: util.HashMap[(Double,Double), Int]): (Array[Int], Array[Int]) = {
+    var req_arr = new ArrayBuffer[Int]
+    var base_arr = new ArrayBuffer[Int]
+    var target_list = new ArrayBuffer[(Double,Double)]
+
+    req_map.forEach((key, value) => {
+      target_list += key
+    })
+
+    target_list.foreach(target => {
+      req_arr += req_map.get(target)
+      base_arr += base_map.get(target)
+    })
+
+    return (req_arr.toArray, base_arr.toArray)
+  }
 
   def writeTwoArray(name: String, arrSet: (Array[Int], Array[Int])): Unit = {
     var path = "D:/ParseDataForTest/Test"
