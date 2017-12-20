@@ -369,7 +369,7 @@ class ParseData {
       file.mkdirs();
     }
 
-    for (i <- 0 to 84) {
+    for (i <- 50 to 84) {
       var user = user_list(i)
       var readFile = locationPath + "/" + user + ".csv"
       var writeFile = "D:/ParseDataForTest/Test/LOCATION/" + user + ".csv"
@@ -397,7 +397,7 @@ class ParseData {
       writer.close()
     }
 
-    for (i <- 0 to 84) {
+    for (i <- 50 to 84) {
       var user = user_list(i)
       var readFile = callLogPath + "/" + user + ".csv"
       var writeFile = "D:/ParseDataForTest/Test/CDR/" + user + ".csv"
@@ -439,9 +439,9 @@ class ParseData {
       file.mkdirs();
     }
 
-    for (i <- 0 to 84) {
+    for (i <- 50 to 84) {
       var user = user_list(i)
-      var readFile = "D:/ParseDataForTest/Test/Location/" + user + ".csv"
+      var readFile = "D:/ParseDataForTest/Test/LOCATION/" + user + ".csv"
       var writeFile = "D:/ParseDataForTest/Test/StolenLOCATION/" + user + ".csv"
       var writer = new FileWriter(writeFile)
 
@@ -474,7 +474,7 @@ class ParseData {
       writer.close()
     }
 
-    for (i <- 0 to 84) {
+    for (i <- 50 to 84) {
       var user = user_list(i)
       var readFile = "D:/ParseDataForTest/Test/CDR/" + user + ".csv"
       var writeFile = "D:/ParseDataForTest/Test/StolenCDR/" + user + ".csv"

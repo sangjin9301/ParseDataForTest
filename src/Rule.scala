@@ -1,23 +1,39 @@
+import java.io.{BufferedReader, FileReader}
 import java.util
+
+import org.apache.commons.io.LineIterator
 
 import scala.collection.mutable.ArrayBuffer
 
 /**
   * Created by SANGJIN-NAM on 2017-12-20.
   */
-class Rule(user: String, crnTime: Int) {
+class Rule(user: String, isUser:Boolean) {
   var parseData = new ParseData
   var st = new SampleTest
-  val cdrPath = "D:/ParseDataForTest/" + "CDR/" + user
-  val locationPath = "D:/ParseDataForTest/" + "LOCATION/" + user
+  var cdrPath = ""
+  var locationPath = ""
+  if(isUser){
+    cdrPath = "D:/ParseDataForTest/Test/CDR/" + user
+    locationPath = "D:/ParseDataForTest/Test/Location/" + user
+  }
+  else{
+    cdrPath = "D:/ParseDataForTest/Test/StolenCDR/" + user
+    locationPath = "D:/ParseDataForTest/Test/StolenLocation/" + user
+  }
 
-  def Rule01: Boolean = {
+
+
+
+  def Rule01: Int = {
     var reqTime = 3600
     var oneWeek = 86400 * 7
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(cdrPath + ".csv")
+
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime, reqTime)
     var base = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime - oneWeek, reqTime)
@@ -29,16 +45,19 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
+
   }
 
-  def Rule02: Boolean = {
+  def Rule02: Int = {
     var reqTime = 3600
     var oneWeek = 86400 * 7
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(cdrPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime, reqTime)
     var base1 = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime - oneWeek, reqTime)
@@ -64,16 +83,18 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 
-  def Rule03: Boolean = {
+  def Rule03: Int = {
     var reqTime = 86400
     var oneWeek = 86400 * 7
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(cdrPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime, reqTime)
     var base1 = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime - oneWeek, reqTime)
@@ -99,16 +120,18 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 
-  def Rule04: Boolean = {
+  def Rule04: Int = {
     var reqTime = 86400
     var oneWeek = 86400 * 7
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(cdrPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime, reqTime)
 
@@ -133,15 +156,17 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 
-  def Rule05: Boolean = {
+  def Rule05: Int = {
     var reqTime = 86400 * 30
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(cdrPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime, reqTime)
     var base = parseData.getCDRFrequencyOnTime(parseData.toCDR(temp), crnTime-reqTime, reqTime*12)
@@ -158,17 +183,19 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 
   //////////////////////////////////////////////////////////////////////////Location/////////////////////////////////////////////////////////////////////////////
-  def Rule06: Boolean = {
+  def Rule06: Int = {
     var reqTime = 3600
     var oneWeek = 86400 * 7
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(locationPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime, reqTime)
     var base = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime - oneWeek, reqTime)
@@ -180,16 +207,18 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 
-  def Rule07: Boolean = {
+  def Rule07: Int = {
     var reqTime = 3600
     var oneWeek = 86400 * 7
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(locationPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime, reqTime)
     var base1 = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime - oneWeek, reqTime)
@@ -215,16 +244,18 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 
-  def Rule08: Boolean = {
+  def Rule08: Int = {
     var reqTime = 86400
     var oneWeek = 86400 * 7
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(locationPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime, reqTime)
     var base1 = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime - oneWeek, reqTime)
@@ -250,16 +281,18 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 
-  def Rule09: Boolean = {
+  def Rule09: Int = {
     var reqTime = 86400
     var oneWeek = 86400 * 7
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(locationPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime, reqTime)
 
@@ -284,15 +317,17 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 
-  def Rule10: Boolean = {
+  def Rule10: Int = {
     var reqTime = 86400 * 30
     var p: Double = 0
     var result: Boolean = false
 
     var temp = parseData.getData(locationPath + ".csv")
+    var crnTime = temp.last(2).toInt
 
     var req = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime, reqTime)
     var base = parseData.getLocationFrequencyOnTime(parseData.toLocation(temp), crnTime-reqTime, reqTime*12)
@@ -309,6 +344,7 @@ class Rule(user: String, crnTime: Int) {
     if (p > 0.90) result = true
     else result = false
 
-    return result
+    if(result) return 1
+    else return 0
   }
 }

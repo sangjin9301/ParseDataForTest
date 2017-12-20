@@ -1,4 +1,4 @@
-import java.io.{BufferedReader, File, FileReader, FileWriter}
+import java.io._
 
 import org.apache.commons.io.LineIterator
 
@@ -254,10 +254,11 @@ object Start {
 
 
   def main(args: Array[String]): Unit = {
-
+    ////////////////////////
     var pd = new ParseData
     pd.mkTestFiles
     pd.mkTestStolenFiles
+    /////////////////////////////////
     //    var rule = new Rule("fa10-01-10",1305324180)
     //    println(rule.Rule01)
     //    println(rule.Rule02)
@@ -269,6 +270,45 @@ object Start {
     //    println(rule.Rule08)
     //    println(rule.Rule09)
     //    println(rule.Rule10)
+    //////////////////////////////////
+    var sb = new StringBuilder
+    pd.user_list.foreach(user => {
+      try {
+        var r = new Rule(user, true)
+        sb.append("1,")
+        sb.append(r.Rule01 + ",")
+        sb.append(r.Rule02 + ",")
+        sb.append(r.Rule03 + ",")
+        sb.append(r.Rule04 + ",")
+        sb.append(r.Rule05 + ",")
+        sb.append(r.Rule06 + ",")
+        sb.append(r.Rule07 + ",")
+        sb.append(r.Rule08 + ",")
+        sb.append(r.Rule09 + ",")
+        sb.append(r.Rule10 + ",")
+        sb.append("\n")
+
+        r = new Rule(user, false)
+        sb.append("0,")
+        sb.append(r.Rule01 + ",")
+        sb.append(r.Rule02 + ",")
+        sb.append(r.Rule03 + ",")
+        sb.append(r.Rule04 + ",")
+        sb.append(r.Rule05 + ",")
+        sb.append(r.Rule06 + ",")
+        sb.append(r.Rule07 + ",")
+        sb.append(r.Rule08 + ",")
+        sb.append(r.Rule09 + ",")
+        sb.append(r.Rule10 + ",")
+        sb.append("\n")
+      } catch {
+        case e: FileNotFoundException => {}
+      }
+    })
+
+    var writer = new FileWriter("D:/ParseDataForTest/result.csv")
+    writer.write(sb.mkString)
+    writer.close
 
 
   }
